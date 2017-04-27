@@ -10,8 +10,15 @@ namespace StackOverflow.Controllers
     {
         public ActionResult Index()
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                ViewBag.IsAdministrator = HttpContext.User.IsInRole("administrator");
+                ViewBag.IsGeneralUser = HttpContext.User.IsInRole("generalUser");
+            }
             return View();
         }
+
+        [Authorize(Roles = "generalUser")]
 
         public ActionResult About()
         {

@@ -218,6 +218,9 @@
     <Compile Include="Migrations\201704272012455_third.cs" />
     <Compile Include="Migrations\201704272012455_third.Designer.cs">
       <DependentUpon>201704272012455_third.cs</DependentUpon>
+    <Compile Include="Migrations\201704271952219_UserRoleCreated.cs" />
+    <Compile Include="Migrations\201704271952219_UserRoleCreated.Designer.cs">
+      <DependentUpon>201704271952219_UserRoleCreated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -329,6 +332,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704272012455_third.resx">
       <DependentUpon>201704272012455_third.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704271952219_UserRoleCreated.resx">
+      <DependentUpon>201704271952219_UserRoleCreated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
