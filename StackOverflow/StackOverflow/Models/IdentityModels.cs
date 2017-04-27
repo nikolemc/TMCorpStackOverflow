@@ -29,5 +29,11 @@ namespace StackOverflow.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<StackOverflow.Models.Post> Posts { get; set; }
+
+        public System.Data.Entity.DbSet<StackOverflow.Models.Comment> Comments { get; set; }
+
+        public System.Data.Entity.DbSet<StackOverflow.Models.PostVote> PostVotes { get; set; }
     }
 }
