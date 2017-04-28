@@ -1,0 +1,30 @@
+﻿@model StackOverflow.Models.Post
+
+@{
+    var upVoteClass = "";
+    var downVoteClass = "";
+    var disabled = "";
+    if (Model.VoteValue == 1)
+    {
+        upVoteClass = "up-clicked";
+    }
+    else if (Model.VoteValue == -1)
+    {
+        downVoteClass = "down-clicked";
+    }
+    if (!Model.IsAllowedToVote)
+    {
+        disabled = "disabled";
+    }
+}
+
+
+<button class="btn btn-link @upVoteClass" onclick="upVote(@Model.Post.Id);" @disabled>
+    <i class="glyphicon glyphicon-arrow-up"></i>
+</button>
+
+<span>@(Model.Post.UpVote - Model.Post.DownVote)</span>
+
+<button class="btn btn-link @downVoteClass" onclick="downVote(@Model.Post.Id);" @disabled>
+    <i class="glyphicon glyphicon-arrow-down"></i>
+</button>
