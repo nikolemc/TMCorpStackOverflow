@@ -1,0 +1,36 @@
+﻿@model StackOverflow.Models.Comment
+
+@{
+    var upVoteClass = "";
+    var downVoteClass = "";
+    var disabled = "";
+  <!--  if (Model.VoteValue == 1)
+    {
+        upVoteClass = "up-clicked";
+    }
+    else if (Model.VoteValue == -1)
+    {
+        downVoteClass = "down-clicked";
+    } -->
+    if (false)
+    {
+        disabled = "disabled";
+    }
+}
+
+<button class="btn btn-link @upVoteClass" onclick="upVote(@Model.Id);" @disabled>
+    <i class="glyphicon glyphicon-arrow-up"></i>
+</button>
+<span>
+@if (Model.Votes == null)
+{
+    <span>0</span>
+}
+else
+{
+    <span>@Model.Votes.Sum(v => v.VoteValue)</span>
+}    
+</span>
+<button class="btn btn-link @downVoteClass" onclick="downVote(@Model.Id);" @disabled>
+    <i class="glyphicon glyphicon-arrow-down"></i>
+</button>

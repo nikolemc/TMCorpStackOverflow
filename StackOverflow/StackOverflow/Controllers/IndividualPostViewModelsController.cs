@@ -19,7 +19,7 @@ namespace StackOverflow.Controllers
         public ActionResult Index(int postId)
         {
             var post = db.Posts.Find(postId);
-            var listOfComments = db.Comments.Where(w => w.PostId == postId).Include(c => c.User).ToList();
+            var listOfComments = db.Comments.Where(w => w.PostId == postId).Include(c => c.User).Include(v => v.Votes).ToList();
 
             var postPageToDisplay = new IndividualPostViewModel() { Post = post, Comments = listOfComments };
 
