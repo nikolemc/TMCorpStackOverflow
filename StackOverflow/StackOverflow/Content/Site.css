@@ -121,7 +121,6 @@ used to vertically center elements, may need modification if you're not using de
             background: #999;
             display: inline-block;
             text-align: center;
-            float: right;
         }
 
     .active.widget h2:after {

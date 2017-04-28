@@ -1,4 +1,6 @@
-﻿@{
+﻿@model StackOverflow.ViewModels.HomePageViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -34,6 +36,9 @@
         <div class="tab-pane active" id="1">
 
         </div>
+
+@foreach (var post in Model.Post)
+{
         <div class="section">
             <div class="container">
                 <div class="row">
@@ -43,8 +48,9 @@
                                 <tr>
                                     @*this is the start of table row*@
                                     <td>
-                                        <div class="row row-centered">
-                                            <div class="col-xs-3 col-centered">0</div>
+                                        <div class="row row-centered"> @*id="voteContainer-@post.Id">
+                                        @Html.Partial("_voteDisplay", post)*@
+                                            <div class="col-xs-3 col-centered">@post.Votes.Count()</div>
                                             <div class="col-xs-3 col-centered">0</div>
                                             <div class="col-xs-3 col-centered">1</div>
                                             <button class="btn btn-xs" value="left" type="button">
@@ -67,14 +73,23 @@
                                     </td>
                                     <td>
                                         <h4>
-                                            <a href="mailto:username@gmail.com">User Question Goes Here and this is a hotlink</a>
+                                            <a href="@post.ImageUrl" title="@post.Title">@post.Title</a>
                                         </h4>
-                                        <h5>UserName</h5>
+                                        <h5>postcontent="@post.PostContent">@post.PostContent</h5>
                                     </td>
                                     <td>
                                         <div class="row col-sm-pull-6">
                                             <font color="orange">
-                                                <h6>asked 60 seconds ago</h6> <h6>by: Name Surname</h6><h6>XXX</h6>
+                                                <h6>Submitted at @post.PostedTimeStamp.ToShortDateString() - X hours ago by
+                                                @if (post.User != null)
+                                                {
+                                                    <span>@post.User.Email</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>no user found</span>
+                                                }
+                                                </h6>
                                             </font>
                                         </div>
                                     </td>
@@ -88,6 +103,7 @@
             </div>
 
         </div>
+}
         <div class="tab-pane" id="2">
             <h3>Blah blah</h3>
         </div>
