@@ -31,7 +31,8 @@
                         <li><a href="#">Tags</a></li>
                         <li><a href="#">Users</a></li>
                     </ul>
-                    <button type="button" class="btn btn-warning navbar-btn pull-right" >Sign In </button>
+                    @Html.Partial("_LoginPartial")
+
                     <form class="navbar-form" role="search" method="get" id="searchform" action="">
                         <div class="form-group">
                             <input name="s" id="s" type="text" class="search-query form-control" autocomplete="off" placeholder="Search...">
