@@ -2,12 +2,129 @@
     ViewBag.Title = "Home Page";
 }
 
-<div>
-    Is Administrator   = @ViewBag.IsAdministrator 
-    Is GeneralUser = @ViewBag.IsGeneralUser
+@*<div>
+        Is Administrator   = @ViewBag.IsAdministrator
+        Is GeneralUser = @ViewBag.IsGeneralUser
+    </div>*@
+
+
+<div id="Tabs" class="container">
+    <font color="black">
+        <h3>Questions</h3>
+    </font>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#1" data-toggle="tab">Interesting</a>
+        </li>
+        <li>
+            <a href="#2" data-toggle="tab">Featured</a>
+        </li>
+        <li>
+            <a href="#3" data-toggle="tab">Hot</a>
+        </li>
+        <li>
+            <a href="#4" data-toggle="tab">Week</a>
+        </li>
+        <li>
+            <a href="#5" data-toggle="tab">Month</a>
+        </li>
+    </ul>
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="1">
+
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-responsive">
+                            <tbody>
+                                <tr>
+                                    @*this is the start of table row*@
+                                    <td>
+                                        <div class="row row-centered">
+                                            <div class="col-xs-3 col-centered">0</div>
+                                            <div class="col-xs-3 col-centered">0</div>
+                                            <div class="col-xs-3 col-centered">1</div>
+                                            <button class="btn btn-xs" value="left" type="button">
+                                                <p><span class="glyphicon glyphicon-circle-arrow-up"></span></p>
+                                            </button>
+                                        </div>
+                                        <div class="row row-centered">
+                                            <div style="font-size: x-small;">
+                                                <div class="col-xs-3 col-centered">votes</div>
+                                                <div class="col-xs-3 col-centered">answer</div>
+                                                <div class="col-xs-3 col-centered">view</div>
+                                            </div>
+                                            <button class="btn btn-xs" value="left" type="button">
+                                                <p><span class="glyphicon glyphicon-circle-arrow-down"></span></p>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle" width="60">
+                                    </td>
+                                    <td>
+                                        <h4>
+                                            <a href="mailto:username@gmail.com">User Question Goes Here and this is a hotlink</a>
+                                        </h4>
+                                        <h5>UserName</h5>
+                                    </td>
+                                    <td>
+                                        <div class="row col-sm-pull-6">
+                                            <font color="orange">
+                                                <h6>asked 60 seconds ago</h6> <h6>by: Name Surname</h6><h6>XXX</h6>
+                                            </font>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane" id="2">
+            <h3>Blah blah</h3>
+        </div>
+        <div class="tab-pane" id="3">
+            <h3>blah blah</h3>
+        </div>
+        <div class="tab-pane" id="4">
+            <h3>blah blah</h3>
+        </div>
+        <div class="tab-pane" id="5">
+            <h3>blah blah</h3>
+        </div>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col col-xs-4"> <font color="orange">
+                Page 1 of 5 </font>
+                </div>
+                <div class="col col-xs-8">
+                    <ul class="pagination hidden-xs pull-right">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                       
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
 </div>
 
-<div class="jumbotron">
-    <h1>StackOverFlowing</h1>
-    <p class="lead">StackOverFlow</p>
-</div>
+
+
+

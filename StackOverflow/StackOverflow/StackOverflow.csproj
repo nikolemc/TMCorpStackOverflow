@@ -207,23 +207,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704271950554_first.cs" />
-    <Compile Include="Migrations\201704271950554_first.Designer.cs">
-      <DependentUpon>201704271950554_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704272003487_second.cs" />
-    <Compile Include="Migrations\201704272003487_second.Designer.cs">
-      <DependentUpon>201704272003487_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704272012455_third.cs" />
-    <Compile Include="Migrations\201704272012455_third.Designer.cs">
-      <DependentUpon>201704272012455_third.cs</DependentUpon>
-      </Compile>
-    <Compile Include="Migrations\201704271952219_UserRoleCreated.cs" />
-    <Compile Include="Migrations\201704271952219_UserRoleCreated.Designer.cs">
-      <DependentUpon>201704271952219_UserRoleCreated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -240,6 +223,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\StackOverflowLogo.PNG" />
+    <Content Include="Images\StackOverflowLogoTrans.PNG" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -323,20 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704271950554_first.resx">
-      <DependentUpon>201704271950554_first.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704272003487_second.resx">
-      <DependentUpon>201704272003487_second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704272012455_third.resx">
-      <DependentUpon>201704272012455_third.cs</DependentUpon>
-      </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704271952219_UserRoleCreated.resx">
-      <DependentUpon>201704271952219_UserRoleCreated.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
