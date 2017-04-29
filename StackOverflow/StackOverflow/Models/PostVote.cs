@@ -19,5 +19,7 @@ namespace StackOverflow.Models
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
 
+        public bool IsAllowedToVote { get; set; } = true;
+
     }
 }

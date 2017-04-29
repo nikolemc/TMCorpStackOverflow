@@ -7,12 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
+using Microsoft.AspNet.Identity;
 
 namespace StackOverflow.Controllers
 {
     public class PostVotesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        [HttpPost]
+        public ActionResult Vote(int id, int voteValue)
+        {
+
+            db.PostVotes.Add(new PostVote { PostId = id, IsAllowedToVote = true, UserId = User.Identity.GetUserId(), VoteValue = voteValue });
+            db.SaveChanges();
+            var post = db.Posts.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
+
+            return PartialView("_VoteDisplay", post);
+        }
 
         // GET: PostVotes
         public ActionResult Index()
