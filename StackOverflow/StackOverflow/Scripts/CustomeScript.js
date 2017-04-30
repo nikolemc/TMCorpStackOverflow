@@ -49,3 +49,28 @@ let downVote = (commentId) => {
         })
     }
 }
+
+let markAsAnswered = (commentId) => {
+    let _data = {
+        id: commentId
+    };
+
+    if (!commentId) {
+        alert("No Post Found");
+    }
+    else {
+        $.ajax({
+            url: "/Comments/MarkAnswered",
+            data: JSON.stringify(_data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "html",
+            success: (newHtml) => {
+                $("#MarkAnsweredDisplay-" + commentId).html(newHtml);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+
+            }
+        })
+    }
+}

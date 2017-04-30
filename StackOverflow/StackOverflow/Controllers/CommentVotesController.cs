@@ -7,133 +7,134 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
+using Microsoft.AspNet.Identity;
 
 namespace StackOverflow.Controllers
 {
-    public class CommentsController : Controller
+    public class CommentVotesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Comments
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Vote(int id, int voteValue)
         {
-            var comments = db.Comments.Include(c => c.Post).Include(c => c.User);
-            return View(comments.ToList());
+            
+            db.CommentVotes.Add(new CommentVote { CommentId = id, IsAllowedToVote = true, UserId = User.Identity.GetUserId(), VoteValue = voteValue });
+            db.SaveChanges();
+            var comment = db.Comments.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
+
+            return PartialView("_CommentVotePartial", comment);
         }
 
-        // GET: Comments/Details/5
+
+
+
+        // GET: CommentVotes
+        public ActionResult Index()
+        {
+            var commentVotes = db.CommentVotes.Include(c => c.Comment).Include(c => c.User);
+            return View(commentVotes.ToList());
+        }
+
+        // GET: CommentVotes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            CommentVote commentVote = db.CommentVotes.Find(id);
+            if (commentVote == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(commentVote);
         }
 
-        // GET: Comments/Create
+        // GET: CommentVotes/Create
         public ActionResult Create()
         {
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
+            ViewBag.CommentId = new SelectList(db.Comments, "Id", "Title");
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: Comments/Create
+        // POST: CommentVotes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,CommentContent,CommentedTimeStamp,PostId,UserId")] Comment comment)
+        public ActionResult Create([Bind(Include = "Id,VoteValue,UserId,CommentId")] CommentVote commentVote)
         {
             if (ModelState.IsValid)
             {
-                db.Comments.Add(comment);
+                db.CommentVotes.Add(commentVote);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            ViewBag.CommentId = new SelectList(db.Comments, "Id", "Title", commentVote.CommentId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", commentVote.UserId);
+            return View(commentVote);
         }
 
-       
-
-        [HttpPost]
-        public ActionResult MarkAnswered(int id)
-        {
-
-            db.Comments.FirstOrDefault(c => c.Id == id).IsAnswered = true;
-            db.SaveChanges();
-            var comment = db.Comments.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
-
-            return PartialView("_CommentIsAnsweredPartial", comment);
-        }
-
-
-        // GET: Comments/Edit/5
+        // GET: CommentVotes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            CommentVote commentVote = db.CommentVotes.Find(id);
+            if (commentVote == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            ViewBag.CommentId = new SelectList(db.Comments, "Id", "Title", commentVote.CommentId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", commentVote.UserId);
+            return View(commentVote);
         }
 
-        // POST: Comments/Edit/5
+        // POST: CommentVotes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,CommentContent,CommentedTimeStamp,PostId,UserId")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,VoteValue,UserId,CommentId")] CommentVote commentVote)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comment).State = EntityState.Modified;
+                db.Entry(commentVote).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            ViewBag.CommentId = new SelectList(db.Comments, "Id", "Title", commentVote.CommentId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", commentVote.UserId);
+            return View(commentVote);
         }
 
-        // GET: Comments/Delete/5
+        // GET: CommentVotes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            CommentVote commentVote = db.CommentVotes.Find(id);
+            if (commentVote == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(commentVote);
         }
 
-        // POST: Comments/Delete/5
+        // POST: CommentVotes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
+            CommentVote commentVote = db.CommentVotes.Find(id);
+            db.CommentVotes.Remove(commentVote);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
