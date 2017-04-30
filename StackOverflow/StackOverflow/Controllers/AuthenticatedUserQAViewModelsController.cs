@@ -40,7 +40,7 @@ namespace StackOverflow.Controllers
         // GET: AuthenticatedUserQAViewModels/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace StackOverflow.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", authenticatedUserQAViewModel.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", authenticatedUserQAViewModel.UserId);
             return View(authenticatedUserQAViewModel);
         }
 
@@ -74,7 +74,7 @@ namespace StackOverflow.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", authenticatedUserQAViewModel.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", authenticatedUserQAViewModel.UserId);
             return View(authenticatedUserQAViewModel);
         }
 
@@ -91,7 +91,7 @@ namespace StackOverflow.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", authenticatedUserQAViewModel.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", authenticatedUserQAViewModel.UserId);
             return View(authenticatedUserQAViewModel);
         }
 

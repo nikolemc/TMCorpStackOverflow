@@ -92,7 +92,7 @@
                                             <h4>
                                                 <a href="@post.ImageUrl" title="@post.Title">@Html.ActionLink(post.Title, "Index", "IndividualPostViewModels", new { postID = post.Id }, null)</a>
                                             </h4>
-                                            <h5>postcontent="@post.PostContent">@post.PostContent</h5>
+                                            <h5>@post.PostContent</h5>
                                         </td>
                                         <td>
                                             <div class="row col-sm-pull-6">
