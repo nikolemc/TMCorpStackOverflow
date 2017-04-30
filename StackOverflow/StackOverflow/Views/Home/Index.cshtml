@@ -64,12 +64,17 @@
                                                 <div class="col-xs-3 col-centered">0</div>
                                                 <div class="col-xs-3 col-centered">1</div>
                                                 
-                                                <div class="col-md-2" id="voteContainer-@post.Id">
-                                                    @Html.Partial("_voteDisplay", post)
-                                                </div>
-                                                @*<button class="btn btn-xs" value="left" type="button">
-                                                    <p><span class="glyphicon glyphicon-circle-arrow-up"></span></p>
-                                                </button>*@
+                                                @if (HttpContext.Current.User.Identity.IsAuthenticated) //only show button to users who are logged in
+                                                {
+                                                    <div class="col-md-2" id="voteContainer-@post.Id">
+                                                        @Html.Partial("_voteDisplay", post)
+                                                    </div>
+                                                    @*<button class="btn btn-xs" value="left" type="button">
+                                                            <p><span class="glyphicon glyphicon-circle-arrow-up"></span></p>
+                                                        </button>*@
+
+                                                }
+                                                
                                             </div>
                                             <div class="row row-centered">
                                                 <div style="font-size: x-small;">
