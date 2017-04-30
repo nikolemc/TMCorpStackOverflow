@@ -39,5 +39,9 @@ namespace StackOverflow.Models
         public System.Data.Entity.DbSet<StackOverflow.ViewModels.IndividualPostViewModel> IndividualPostViewModels { get; set; }
 
         public System.Data.Entity.DbSet<StackOverflow.Models.CommentVote> CommentVotes { get; set; }
+
+        public System.Data.Entity.DbSet<StackOverflow.ViewModels.AuthenticatedUserQAViewModel> AuthenticatedUserQAViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<StackOverflow.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

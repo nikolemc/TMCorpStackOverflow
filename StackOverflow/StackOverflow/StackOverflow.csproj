@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuthenticatedUserQAViewModelsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\CommentVotesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,6 +217,10 @@
     <Compile Include="Migrations\201704290040207_AddedVote.cs" />
     <Compile Include="Migrations\201704290040207_AddedVote.Designer.cs">
       <DependentUpon>201704290040207_AddedVote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704301933149_UserQA.cs" />
+    <Compile Include="Migrations\201704301933149_UserQA.Designer.cs">
+      <DependentUpon>201704301933149_UserQA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -318,6 +323,11 @@
     <Content Include="Views\CommentVotes\Index.cshtml" />
     <Content Include="Views\Shared\_CommentVotePartial.cshtml" />
     <Content Include="Views\Shared\_VoteDisplay.cshtml" />
+    <Content Include="Views\AuthenticatedUserQAViewModels\Create.cshtml" />
+    <Content Include="Views\AuthenticatedUserQAViewModels\Delete.cshtml" />
+    <Content Include="Views\AuthenticatedUserQAViewModels\Details.cshtml" />
+    <Content Include="Views\AuthenticatedUserQAViewModels\Edit.cshtml" />
+    <Content Include="Views\AuthenticatedUserQAViewModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704290040207_AddedVote.resx">
       <DependentUpon>201704290040207_AddedVote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704301933149_UserQA.resx">
+      <DependentUpon>201704301933149_UserQA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
