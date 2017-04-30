@@ -13,6 +13,17 @@ namespace StackOverflow.Controllers
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
+        [HttpPut]
+        public ActionResult MarkAnswered(int id)
+        {
+
+            db.Comments.FirstOrDefault(c => c.Id == id).IsAnswered = true;
+            db.SaveChanges();
+            var comment = db.Comments.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
+
+            return PartialView("_CommentIsAnsweredPartial", comment);
+        }
 
         // GET: Comments
         public ActionResult Index()
@@ -63,19 +74,7 @@ namespace StackOverflow.Controllers
             return View(comment);
         }
 
-       
-
-        [HttpPost]
-        public ActionResult MarkAnswered(int id)
-        {
-
-            db.Comments.FirstOrDefault(c => c.Id == id).IsAnswered = true;
-            db.SaveChanges();
-            var comment = db.Comments.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
-
-            return PartialView("_CommentIsAnsweredPartial", comment);
-        }
-
+    
 
         // GET: Comments/Edit/5
         public ActionResult Edit(int? id)
