@@ -17,7 +17,7 @@ namespace StackOverflow.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            var posts = db.Posts.Include(p => p.User);
+            var posts = db.Posts.Include(i => i.Votes).Include(p => p.User);
             return View(posts.ToList());
         }
 
@@ -48,17 +48,16 @@ namespace StackOverflow.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,PostContent,ImageUrl,PostedTimeStamp,UserId")] Post post)
+        public ActionResult Create([Bind(Include = "Title,PostContent,ImageUrl,PostedTimeStamp,UserId")] Post post)
         {
             if (ModelState.IsValid)
             {
                 db.Posts.Add(post);
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", post.UserId);
-            return View(post);
+            ViewBag.UserId = new SelectList(db.Users,"Email", post.UserId);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Posts/Edit/5

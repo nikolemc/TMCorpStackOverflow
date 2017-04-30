@@ -20,7 +20,7 @@ namespace StackOverflow.Controllers
                 ViewBag.IsAdministrator = HttpContext.User.IsInRole("administrator");
                 ViewBag.IsGeneralUser = HttpContext.User.IsInRole("generalUser");
             }
-            var post = db.Posts.Include(c => c.User).ToList();
+            var post = db.Posts.Include(i => i.Votes).Include(c => c.User).OrderByDescending(t => t.PostedTimeStamp).Take(10).ToList();    //This is where we get top 10 and sort by time stamp
             var postPageToDisplay = new HomePageViewModel() { Post = post};
             return View(postPageToDisplay);
         }

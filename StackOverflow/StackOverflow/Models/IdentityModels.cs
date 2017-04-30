@@ -40,6 +40,10 @@ namespace StackOverflow.Models
 
         public System.Data.Entity.DbSet<StackOverflow.Models.CommentVote> CommentVotes { get; set; }
 
+
         public System.Data.Entity.DbSet<StackOverflow.ViewModels.ModeratorDashboardViewModel> ModeratorDashboardViewModels { get; set; }
+        public System.Data.Entity.DbSet<StackOverflow.ViewModels.AuthenticatedUserQAViewModel> AuthenticatedUserQAViewModels { get; set; }
+
+
     }
 }
