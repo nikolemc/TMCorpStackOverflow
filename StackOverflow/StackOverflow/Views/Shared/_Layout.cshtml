@@ -23,11 +23,11 @@
                         <img src="~/Images/StackOverFlowLogoTrans.PNG" alt="StackOverFlow">
                     </a>
                 </div>
+                
                 <div id="navbar1" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Questions</a></li>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Documentation</a></li>
+                        <li class="active">@Html.ActionLink("Q & A", "Index", "AuthenticatedUserQAViewModels")</li>
+                        <li>@Html.ActionLink("Dash Board", "Index", "ModeratorDashboardViewModels")</li>
                         <li><a href="#">Tags</a></li>
                         <li><a href="#">Users</a></li>
                     </ul>
@@ -38,7 +38,8 @@
                             <input name="s" id="s" type="text" class="search-query form-control" autocomplete="off" placeholder="Search...">
                         </div>
                     </form>
-                   
+
+                
                    </div>
                 <!--/.nav-collapse -->
             </div>

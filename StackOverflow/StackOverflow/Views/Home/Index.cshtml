@@ -1,5 +1,7 @@
 ﻿@model StackOverflow.ViewModels.HomePageViewModel
 
+@using Microsoft.AspNet.Identity;
+
 @{
     ViewBag.Title = "Home Page";
 }
@@ -12,7 +14,14 @@
 
 <div id="Tabs" class="container">
     <font color="black">
-        <h3>Questions</h3>
+        <div class="col-md-1">
+            <h4>Questions</h4>
+        </div> <div class="col-md-4">
+            @if (HttpContext.Current.User.Identity.IsAuthenticated) //only show button to users who are logged in
+            {
+                @Html.ActionLink("Click here to ask a question", "Create", "Posts", new { UserID = User.Identity.GetUserId() }, htmlAttributes: new { id = "loginLink", @class = "btn-group btn-group-justified btn btn-warning" })
+            }
+        </div>
     </font>
     <ul class="nav nav-tabs">
         <li class="active">
@@ -37,73 +46,82 @@
 
         </div>
 
-@foreach (var post in Model.Post)
-{
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-hover table-responsive">
-                            <tbody>
-                                <tr>
-                                    @*this is the start of table row*@
-                                    <td>
-                                        <div class="row row-centered"> @*id="voteContainer-@post.Id">
-                                        @Html.Partial("_voteDisplay", post)*@
-                                            <div class="col-xs-3 col-centered">@post.Votes.Count()</div>
-                                            <div class="col-xs-3 col-centered">0</div>
-                                            <div class="col-xs-3 col-centered">1</div>
-                                            <button class="btn btn-xs" value="left" type="button">
-                                                <p><span class="glyphicon glyphicon-circle-arrow-up"></span></p>
-                                            </button>
-                                        </div>
-                                        <div class="row row-centered">
-                                            <div style="font-size: x-small;">
-                                                <div class="col-xs-3 col-centered">votes</div>
-                                                <div class="col-xs-3 col-centered">answer</div>
-                                                <div class="col-xs-3 col-centered">view</div>
+        @foreach (var post in Model.Post)
+        {
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-responsive">
+                                <tbody>
+                                    <tr>
+                                        @*this is the start of table row*@
+                                        <td>
+                                            <div class="row row-centered">
+                                                @*id="voteContainer-@post.Id">
+                                                    @Html.Partial("_voteDisplay", post)*@
+                                                <div class="col-xs-3 col-centered">@post.Votes.Count()</div>
+                                                <div class="col-xs-3 col-centered">0</div>
+                                                <div class="col-xs-3 col-centered">1</div>
+                                                
+                                                @if (HttpContext.Current.User.Identity.IsAuthenticated) //only show button to users who are logged in
+                                                {
+                                                    <div class="col-md-2" id="voteContainer-@post.Id">
+                                                        @Html.Partial("_voteDisplay", post)
+                                                    </div>
+                                                    @*<button class="btn btn-xs" value="left" type="button">
+                                                            <p><span class="glyphicon glyphicon-circle-arrow-up"></span></p>
+                                                        </button>*@
+
+                                                }
+                                                
                                             </div>
-                                            <button class="btn btn-xs" value="left" type="button">
-                                                <p><span class="glyphicon glyphicon-circle-arrow-down"></span></p>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle" width="60">
-                                    </td>
-                                    <td>
-                                        <h4>
-                                            <a href="@post.ImageUrl" title="@post.Title">@post.Title</a>
-                                        </h4>
-                                        <h5>postcontent="@post.PostContent">@post.PostContent</h5>
-                                    </td>
-                                    <td>
-                                        <div class="row col-sm-pull-6">
-                                            <font color="orange">
-                                                <h6>Submitted at @post.PostedTimeStamp.ToShortDateString() - X hours ago by
-                                                @if (post.User != null)
-                                                {
-                                                    <span>@post.User.Email</span>
-                                                }
-                                                else
-                                                {
-                                                    <span>no user found</span>
-                                                }
-                                                </h6>
-                                            </font>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            <div class="row row-centered">
+                                                <div style="font-size: x-small;">
+                                                    <div class="col-xs-3 col-centered">votes</div>
+                                                    <div class="col-xs-3 col-centered">answer</div>
+                                                    <div class="col-xs-3 col-centered">view</div>
+                                                </div>
+                                            </div>
 
-                            </tbody>
-                        </table>
+                                        </td>
+                                        <td>
+                                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle" width="60">
+                                        </td>
+                                        <td>
+                                            <h4>
+                                                <a href="@post.ImageUrl" title="@post.Title">@Html.ActionLink(post.Title, "Index", "IndividualPostViewModels", new { postID = post.Id }, null)</a>
+                                            </h4>
+                                            <h5>@post.PostContent</h5>
+                                        </td>
+                                        <td>
+                                            <div class="row col-sm-pull-6">
+                                                <font color="orange">
+                                                    <h6>
+                                                        Submitted at @post.PostedTimeStamp.ToShortDateString() - X hours ago by
+                                                        @if (post.User != null)
+                                                        {
+                                                            <span>@post.User.Email</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>no user found</span>
+                                                        }
+                                                    </h6>
+                                                </font>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
 
-        </div>
-}
+            </div>
+        }
         <div class="tab-pane" id="2">
             <h3>Blah blah</h3>
         </div>
@@ -119,26 +137,28 @@
 
         <div class="panel-footer">
             <div class="row">
-                <div class="col col-xs-4"> <font color="orange">
-                Page 1 of 5 </font>
+                <div class="col col-xs-4">
+                    <font color="orange">
+                        Page 1 of 5
+                    </font>
                 </div>
                 <div class="col col-xs-8">
                     <ul class="pagination hidden-xs pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                       
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+
                     </ul>
                 </div>
 
             </div>
         </div>
     </div>
-    </div>
+</div>
 </div>
 
 

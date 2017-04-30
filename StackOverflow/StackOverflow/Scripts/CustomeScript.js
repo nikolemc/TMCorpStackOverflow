@@ -49,3 +49,55 @@ let downVote = (commentId) => {
         })
     }
 }
+
+let upPost = (postId) => {
+    let _data = {
+        id: postId,
+        voteValue: 1
+    }
+
+    if (!postId) {
+        alert("No Post Found");
+    }
+    else {
+        $.ajax({
+            url: "/PostVotes/Vote",
+            data: JSON.stringify(_data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "html",
+            success: (newHtml) => {
+                $("#voteContainer-" + postId).html(newHtml);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+
+            }
+        })
+    }
+}
+
+let downPost = (postId) => {
+    let _data = {
+        id: postId,
+        voteValue: -1
+    }
+
+    if (!postId) {
+        alert("No Post Found");
+    }
+    else {
+        $.ajax({
+            url: "/PostVotes/Vote",
+            data: JSON.stringify(_data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "html",
+            success: (newHtml) => {
+                $("#voteContainer-" + postId).html(newHtml);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+
+            }
+        })
+    }
+}

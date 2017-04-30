@@ -1,10 +1,12 @@
 ﻿@model StackOverflow.Models.Post
+@using Microsoft.AspNet.Identity;
 
 @{
     var upVoteClass = "";
     var downVoteClass = "";
     var disabled = "";
-    if (Model.VoteValue == 1)
+    <!--
+    if (Model.Votes.FirstOrDefault(f => f.UserId == User.Identity.GetUserId()) == null && )
     {
         upVoteClass = "up-clicked";
     }
@@ -12,19 +14,26 @@
     {
         downVoteClass = "down-clicked";
     }
-    if (!Model.IsAllowedToVote)
+    -->
+    if (!User.Identity.IsAuthenticated || Model.Votes.FirstOrDefault(f => f.UserId == User.Identity.GetUserId()) != null)
     {
         disabled = "disabled";
     }
 }
 
-
-<button class="btn btn-link @upVoteClass" onclick="upVote(@Model.Post.Id);" @disabled>
+<button class="btn btn-link @upVoteClass" onclick="upPost(@Model.Id);" @disabled>
     <i class="glyphicon glyphicon-arrow-up"></i>
 </button>
-
-<span>@(Model.Post.UpVote - Model.Post.DownVote)</span>
-
-<button class="btn btn-link @downVoteClass" onclick="downVote(@Model.Post.Id);" @disabled>
+<span>
+    @if (Model.Votes == null)
+    {
+        <span>0</span>
+    }
+    else
+    {
+        <span>@Model.Votes.Sum(v => v.VoteValue)</span>
+    }
+</span>
+<button class="btn btn-link @downVoteClass" onclick="downPost(@Model.Id);" @disabled>
     <i class="glyphicon glyphicon-arrow-down"></i>
 </button>

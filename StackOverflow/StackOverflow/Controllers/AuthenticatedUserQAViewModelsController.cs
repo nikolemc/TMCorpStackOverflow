@@ -7,131 +7,116 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
-using Microsoft.AspNet.Identity;
+using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
-    public class PostVotesController : Controller
+    public class AuthenticatedUserQAViewModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        [HttpPost]
-        public ActionResult Vote(int id, int voteValue)
-        {
-
-            db.PostVotes.Add(new PostVote { PostId = id, IsAllowedToVote = true, UserId = User.Identity.GetUserId(), VoteValue = voteValue });
-            db.SaveChanges();
-            var post = db.Posts.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
-
-            return PartialView("_VoteDisplay", post);
-        }
-
-        // GET: PostVotes
+        // GET: AuthenticatedUserQAViewModels
         public ActionResult Index()
         {
-            var postVotes = db.PostVotes.Include(p => p.Post).Include(p => p.User);
-            return View(postVotes.ToList());
+            var authenticatedUserQAViewModels = db.AuthenticatedUserQAViewModels.Include(a => a.User);
+            return View(authenticatedUserQAViewModels.ToList());
         }
 
-        // GET: PostVotes/Details/5
+        // GET: AuthenticatedUserQAViewModels/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PostVote postVote = db.PostVotes.Find(id);
-            if (postVote == null)
+            AuthenticatedUserQAViewModel authenticatedUserQAViewModel = db.AuthenticatedUserQAViewModels.Find(id);
+            if (authenticatedUserQAViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(postVote);
+            return View(authenticatedUserQAViewModel);
         }
 
-        // GET: PostVotes/Create
+        // GET: AuthenticatedUserQAViewModels/Create
         public ActionResult Create()
         {
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: PostVotes/Create
+        // POST: AuthenticatedUserQAViewModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VoteValue,UserId,PostId")] PostVote postVote)
+        public ActionResult Create([Bind(Include = "Id,UserId")] AuthenticatedUserQAViewModel authenticatedUserQAViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.PostVotes.Add(postVote);
+                db.AuthenticatedUserQAViewModels.Add(authenticatedUserQAViewModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", postVote.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", postVote.UserId);
-            return View(postVote);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", authenticatedUserQAViewModel.UserId);
+            return View(authenticatedUserQAViewModel);
         }
 
-        // GET: PostVotes/Edit/5
+        // GET: AuthenticatedUserQAViewModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PostVote postVote = db.PostVotes.Find(id);
-            if (postVote == null)
+            AuthenticatedUserQAViewModel authenticatedUserQAViewModel = db.AuthenticatedUserQAViewModels.Find(id);
+            if (authenticatedUserQAViewModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", postVote.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", postVote.UserId);
-            return View(postVote);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", authenticatedUserQAViewModel.UserId);
+            return View(authenticatedUserQAViewModel);
         }
 
-        // POST: PostVotes/Edit/5
+        // POST: AuthenticatedUserQAViewModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VoteValue,UserId,PostId")] PostVote postVote)
+        public ActionResult Edit([Bind(Include = "Id,UserId")] AuthenticatedUserQAViewModel authenticatedUserQAViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(postVote).State = EntityState.Modified;
+                db.Entry(authenticatedUserQAViewModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", postVote.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", postVote.UserId);
-            return View(postVote);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", authenticatedUserQAViewModel.UserId);
+            return View(authenticatedUserQAViewModel);
         }
 
-        // GET: PostVotes/Delete/5
+        // GET: AuthenticatedUserQAViewModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PostVote postVote = db.PostVotes.Find(id);
-            if (postVote == null)
+            AuthenticatedUserQAViewModel authenticatedUserQAViewModel = db.AuthenticatedUserQAViewModels.Find(id);
+            if (authenticatedUserQAViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(postVote);
+            return View(authenticatedUserQAViewModel);
         }
 
-        // POST: PostVotes/Delete/5
+        // POST: AuthenticatedUserQAViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PostVote postVote = db.PostVotes.Find(id);
-            db.PostVotes.Remove(postVote);
+            AuthenticatedUserQAViewModel authenticatedUserQAViewModel = db.AuthenticatedUserQAViewModels.Find(id);
+            db.AuthenticatedUserQAViewModels.Remove(authenticatedUserQAViewModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
