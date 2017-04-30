@@ -1,18 +1,23 @@
 ﻿@model StackOverflow.Models.Comment
 
+@using Microsoft.AspNet.Identity;
+
+
 @{
     var upVoteClass = "";
     var downVoteClass = "";
     var disabled = "";
-  <!--  if (Model.VoteValue == 1)
+    <!--
+    if (Model.Votes.FirstOrDefault(f => f.UserId == User.Identity.GetUserId()) == null && )
     {
         upVoteClass = "up-clicked";
     }
     else if (Model.VoteValue == -1)
     {
         downVoteClass = "down-clicked";
-    } -->
-    if (false)
+    }
+    -->
+    if (!User.Identity.IsAuthenticated || Model.Votes.FirstOrDefault(f => f.UserId == User.Identity.GetUserId()) != null)
     {
         disabled = "disabled";
     }

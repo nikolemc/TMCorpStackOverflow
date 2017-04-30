@@ -205,14 +205,27 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndividualPostViewModelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ModeratorDashboardViewModelsController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\PostVotesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704281905242_first.cs" />
-    <Compile Include="Migrations\201704281905242_first.Designer.cs">
-      <DependentUpon>201704281905242_first.cs</DependentUpon>
+    <Compile Include="Migrations\201704282134186_first.cs" />
+    <Compile Include="Migrations\201704282134186_first.Designer.cs">
+      <DependentUpon>201704282134186_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704290031469_second.cs" />
+    <Compile Include="Migrations\201704290031469_second.Designer.cs">
+      <DependentUpon>201704290031469_second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704290037319_third.cs" />
+    <Compile Include="Migrations\201704290037319_third.Designer.cs">
+      <DependentUpon>201704290037319_third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704290053122_fourth.cs" />
+    <Compile Include="Migrations\201704290053122_fourth.Designer.cs">
+      <DependentUpon>201704290053122_fourth.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201704290040207_AddedVote.cs" />
     <Compile Include="Migrations\201704290040207_AddedVote.Designer.cs">
@@ -239,6 +252,7 @@
     <Compile Include="ViewModels\AuthenticatedUserQAViewModel.cs" />
     <Compile Include="ViewModels\IndividualPostViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\ModeratorDashboardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -327,11 +341,20 @@
     <Content Include="Views\CommentVotes\Index.cshtml" />
     <Content Include="Views\Shared\_CommentVotePartial.cshtml" />
     <Content Include="Views\Shared\_VoteDisplay.cshtml" />
+
+    <Content Include="Views\ModeratorDashboardViewModels\Create.cshtml" />
+    <Content Include="Views\ModeratorDashboardViewModels\Delete.cshtml" />
+    <Content Include="Views\ModeratorDashboardViewModels\Details.cshtml" />
+    <Content Include="Views\ModeratorDashboardViewModels\Edit.cshtml" />
+    <Content Include="Views\ModeratorDashboardViewModels\Index.cshtml" />
+    <Content Include="Views\Shared\_CommentIsAnsweredPartial.cshtml" />
+
     <Content Include="Views\AuthenticatedUserQAViewModels\Create.cshtml" />
     <Content Include="Views\AuthenticatedUserQAViewModels\Delete.cshtml" />
     <Content Include="Views\AuthenticatedUserQAViewModels\Details.cshtml" />
     <Content Include="Views\AuthenticatedUserQAViewModels\Edit.cshtml" />
     <Content Include="Views\AuthenticatedUserQAViewModels\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -352,8 +375,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704281905242_first.resx">
-      <DependentUpon>201704281905242_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704282134186_first.resx">
+      <DependentUpon>201704282134186_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704290031469_second.resx">
+      <DependentUpon>201704290031469_second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704290037319_third.resx">
+      <DependentUpon>201704290037319_third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704290053122_fourth.resx">
+      <DependentUpon>201704290053122_fourth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704290040207_AddedVote.resx">
       <DependentUpon>201704290040207_AddedVote.cs</DependentUpon>

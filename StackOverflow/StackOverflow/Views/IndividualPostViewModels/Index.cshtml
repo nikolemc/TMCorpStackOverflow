@@ -60,6 +60,11 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <strong>@item.User.UserName</strong> <span class="text-muted">Posted at: @item.CommentedTimeStamp</span>
+                               <span id="MarkAnsweredDisplay-@item.Id">
+                                   @Html.Partial("_CommentIsAnsweredPartial", item)
+                               </span>
+                                
+
                             </div>
                             <div class="panel-body">
                                 @item.CommentContent

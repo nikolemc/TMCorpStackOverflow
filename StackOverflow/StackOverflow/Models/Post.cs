@@ -19,7 +19,7 @@ namespace StackOverflow.Models
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
-        
 
+        public bool IsAnswered { get; set; } = false;
     }
 }

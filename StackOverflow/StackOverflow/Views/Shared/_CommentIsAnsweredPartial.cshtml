@@ -1,0 +1,15 @@
+﻿@model StackOverflow.Models.Comment
+
+@using Microsoft.AspNet.Identity;
+
+@if (Model.IsAnswered)
+{
+    <span>Answered!</span>          
+}
+else
+{
+   <button class="btn btn-link" onclick="markAsAnswered(@Model.Id);">
+    <i class="glyphicon glyphicon-ok">MarkAsAnswered!</i>
+</button>
+}
+

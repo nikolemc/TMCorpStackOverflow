@@ -7,133 +7,118 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
+using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
-    public class CommentsController : Controller
+    public class ModeratorDashboardViewModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Comments
+        // GET: ModeratorDashboardViewModels
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Post).Include(c => c.User);
-            return View(comments.ToList());
+            var listOfPost = db.Posts.ToList();
+            var listOfComments = db.Comments.ToList();
+            var listofUsers = db.Users.ToList();
+
+            var moderatorPageToDisplay = new ModeratorDashboardViewModel()
+            { MyUsers = listofUsers, Comments = listOfComments, Posts = listOfPost };
+
+            return View(moderatorPageToDisplay);
         }
 
-        // GET: Comments/Details/5
+        // GET: ModeratorDashboardViewModels/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            ModeratorDashboardViewModel moderatorDashboardViewModel = db.ModeratorDashboardViewModels.Find(id);
+            if (moderatorDashboardViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(moderatorDashboardViewModel);
         }
 
-        // GET: Comments/Create
+        // GET: ModeratorDashboardViewModels/Create
         public ActionResult Create()
         {
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: Comments/Create
+        // POST: ModeratorDashboardViewModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,CommentContent,CommentedTimeStamp,PostId,UserId")] Comment comment)
+        public ActionResult Create([Bind(Include = "Id")] ModeratorDashboardViewModel moderatorDashboardViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Comments.Add(comment);
+                db.ModeratorDashboardViewModels.Add(moderatorDashboardViewModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            return View(moderatorDashboardViewModel);
         }
 
-       
-
-        [HttpPost]
-        public ActionResult MarkAnswered(int id)
-        {
-
-            db.Comments.FirstOrDefault(c => c.Id == id).IsAnswered = true;
-            db.SaveChanges();
-            var comment = db.Comments.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
-
-            return PartialView("_CommentIsAnsweredPartial", comment);
-        }
-
-
-        // GET: Comments/Edit/5
+        // GET: ModeratorDashboardViewModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            ModeratorDashboardViewModel moderatorDashboardViewModel = db.ModeratorDashboardViewModels.Find(id);
+            if (moderatorDashboardViewModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            return View(moderatorDashboardViewModel);
         }
 
-        // POST: Comments/Edit/5
+        // POST: ModeratorDashboardViewModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,CommentContent,CommentedTimeStamp,PostId,UserId")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id")] ModeratorDashboardViewModel moderatorDashboardViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comment).State = EntityState.Modified;
+                db.Entry(moderatorDashboardViewModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            return View(moderatorDashboardViewModel);
         }
 
-        // GET: Comments/Delete/5
+        // GET: ModeratorDashboardViewModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            ModeratorDashboardViewModel moderatorDashboardViewModel = db.ModeratorDashboardViewModels.Find(id);
+            if (moderatorDashboardViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(moderatorDashboardViewModel);
         }
 
-        // POST: Comments/Delete/5
+        // POST: ModeratorDashboardViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
+            ModeratorDashboardViewModel moderatorDashboardViewModel = db.ModeratorDashboardViewModels.Find(id);
+            db.ModeratorDashboardViewModels.Remove(moderatorDashboardViewModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

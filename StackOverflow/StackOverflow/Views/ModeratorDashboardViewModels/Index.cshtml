@@ -1,0 +1,47 @@
+﻿@model StackOverflow.ViewModels.ModeratorDashboardViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Moderator Dashboard</h2>
+
+<div class="col-md-12 col-lg-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Number of Unanswered Questions</h3>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">@Model.Posts.Where(w => w.IsAnswered == false).Count()</div>
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Number of Total Questions</h3>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">@Model.Posts.Count()</div>
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Number of Questions Per User</h3>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body"> content here !!!!!</div>
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Number of Answers Per User</h3>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body"> content here !!!!!</div>
+    </div>
+</div>
