@@ -7,132 +7,113 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
+using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
-    public class CommentsController : Controller
+    public class SearchViewModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
-        [HttpPut]
-        public ActionResult MarkAnswered(int id)
-        {
 
-            db.Comments.FirstOrDefault(c => c.Id == id).IsAnswered = true;
-            db.SaveChanges();
-            var comment = db.Comments.Include(i => i.Votes).FirstOrDefault(f => f.Id == id);
-
-            return PartialView("_CommentIsAnsweredPartial", comment);
-        }
-
-        // GET: Comments
+        // GET: SearchViewModels
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Post).Include(c => c.User);
-            return View(comments.ToList());
+
+
+            return View();
         }
 
-        // GET: Comments/Details/5
+        // GET: SearchViewModels/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            SearchViewModel searchViewModel = db.SearchViewModels.Find(id);
+            if (searchViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(searchViewModel);
         }
 
-        // GET: Comments/Create
+        // GET: SearchViewModels/Create
         public ActionResult Create()
         {
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: Comments/Create
+        // POST: SearchViewModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,CommentContent,CommentedTimeStamp,PostId,UserId")] Comment comment)
+        public ActionResult Create([Bind(Include = "Id,searchKeyWord")] SearchViewModel searchViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Comments.Add(comment);
+                db.SearchViewModels.Add(searchViewModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            return View(searchViewModel);
         }
 
-    
-
-        // GET: Comments/Edit/5
+        // GET: SearchViewModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            SearchViewModel searchViewModel = db.SearchViewModels.Find(id);
+            if (searchViewModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            return View(searchViewModel);
         }
 
-        // POST: Comments/Edit/5
+        // POST: SearchViewModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,CommentContent,CommentedTimeStamp,PostId,UserId")] Comment comment)
+        public ActionResult Edit([Bind(Include = "Id,searchKeyWord")] SearchViewModel searchViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comment).State = EntityState.Modified;
+                db.Entry(searchViewModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comment.PostId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", comment.UserId);
-            return View(comment);
+            return View(searchViewModel);
         }
 
-        // GET: Comments/Delete/5
+        // GET: SearchViewModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
+            SearchViewModel searchViewModel = db.SearchViewModels.Find(id);
+            if (searchViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
+            return View(searchViewModel);
         }
 
-        // POST: Comments/Delete/5
+        // POST: SearchViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            db.Comments.Remove(comment);
+            SearchViewModel searchViewModel = db.SearchViewModels.Find(id);
+            db.SearchViewModels.Remove(searchViewModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

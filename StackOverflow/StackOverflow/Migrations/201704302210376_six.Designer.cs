@@ -7,13 +7,13 @@ namespace StackOverflow.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdateDatabase : IMigrationMetadata
+    public sealed partial class six : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(six));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704301945204_Update-Database"; }
+            get { return "201704302210376_six"; }
         }
         
         string IMigrationMetadata.Source

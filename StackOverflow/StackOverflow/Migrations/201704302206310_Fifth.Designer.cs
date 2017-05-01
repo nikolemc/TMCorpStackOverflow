@@ -7,13 +7,13 @@ namespace StackOverflow.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddedVote : IMigrationMetadata
+    public sealed partial class Fifth : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedVote));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Fifth));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704290040207_AddedVote"; }
+            get { return "201704302206310_Fifth"; }
         }
         
         string IMigrationMetadata.Source
