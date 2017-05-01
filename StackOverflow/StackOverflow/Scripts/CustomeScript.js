@@ -90,7 +90,7 @@ let markAsAnswered = (commentId) => {
             url: "/Comments/MarkAnswered",
             data: JSON.stringify(_data),
             contentType: "application/json",
-            type: "POST",
+            type: "PUT",
             dataType: "html",
             success: (newHtml) => {
                 $("#MarkAnsweredDisplay-" + commentId).html(newHtml);

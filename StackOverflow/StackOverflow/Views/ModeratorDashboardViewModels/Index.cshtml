@@ -32,7 +32,15 @@
             <h3 class="panel-title">Number of Questions Per User</h3>
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
-        <div class="panel-body"> content here !!!!!</div>
+        
+        <div class="panel-body">
+            @for (int i = 0; i < Model.MyUsers.Count(); i++)
+            {
+                <p>@Model.MyUsers[i].UserName : @Model.Posts.Where(w => w.User == Model.MyUsers[i]).Count()</p>
+
+
+            }
+        </div>
     </div>
 </div>
 
@@ -42,6 +50,12 @@
             <h3 class="panel-title">Number of Answers Per User</h3>
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
-        <div class="panel-body"> content here !!!!!</div>
+        <div class="panel-body">
+            @for (int i = 0; i < Model.MyUsers.Count(); i++)
+            {
+                <p>@Model.MyUsers[i].UserName : @Model.Comments.Where(w => w.User == Model.MyUsers[i]).Count()</p>
+
+            }
+        </div>
     </div>
 </div>
