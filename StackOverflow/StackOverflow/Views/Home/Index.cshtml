@@ -57,24 +57,15 @@
                                     <tr>
                                         @*this is the start of table row*@
                                         <td>
+                                        <td class="col-md-3">
                                             <div class="row row-centered">
                                                 @*id="voteContainer-@post.Id">
                                                     @Html.Partial("_voteDisplay", post)*@
                                                 <div class="col-xs-3 col-centered">@post.Votes.Count()</div>
                                                 <div class="col-xs-3 col-centered">0</div>
                                                 <div class="col-xs-3 col-centered">1</div>
-                                                
-                                                @if (HttpContext.Current.User.Identity.IsAuthenticated) //only show button to users who are logged in
-                                                {
-                                                    <div class="col-md-2" id="voteContainer-@post.Id">
-                                                        @Html.Partial("_voteDisplay", post)
-                                                    </div>
-                                                    @*<button class="btn btn-xs" value="left" type="button">
-                                                            <p><span class="glyphicon glyphicon-circle-arrow-up"></span></p>
-                                                        </button>*@
 
-                                                }
-                                                
+
                                             </div>
                                             <div class="row row-centered">
                                                 <div style="font-size: x-small;">
@@ -84,43 +75,60 @@
                                                 </div>
                                             </div>
 
-                                        </td>
-                                        <td>
-                                            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle" width="60">
-                                        </td>
-                                        <td>
-                                            <h4>
-                                                <a href="@post.ImageUrl" title="@post.Title">@Html.ActionLink(post.Title, "Index", "IndividualPostViewModels", new { postID = post.Id }, null)</a>
-                                            </h4>
-                                            <h5>@post.PostContent</h5>
-                                        </td>
-                                        <td>
-                                            <div class="row col-sm-pull-6">
-                                                <font color="orange">
-                                                    <h6>
-                                                        Submitted at @post.PostedTimeStamp.ToShortDateString() - X hours ago by
-                                                        @if (post.User != null)
-                                                        {
-                                                            <span>@post.User.Email</span>
-                                                        }
-                                                        else
-                                                        {
-                                                            <span>no user found</span>
-                                                        }
-                                                    </h6>
-                                                </font>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            @if (HttpContext.Current.User.Identity.IsAuthenticated) //only show button to users who are logged in
+                                            {
+                                                <div class="col-md-1 col-sm-offset-9 col-centered" id="voteContainer-@post.Id">
+                                                    @Html.Partial("_voteDisplay", post)
+                                                </div>
+                         
+                                                @*<button class="btn btn-xs" value="left" type="button">
+                                                        <p><span class="glyphicon glyphicon-circle-arrow-up"></span></p>
+                                                    </button>*@
 
-                                </tbody>
-                            </table>
-                        </div>
+                                            }
 
-                    </div>
-                </div>
 
-            </div>
+
+
+                                            </td>
+                                            <td>
+                                                <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="img-circle" width="60">
+                                            </td>
+                                            <td class="col-md-6">
+                                                <h4>
+                                                    <a href="@post.ImageUrl" title="@post.Title">@Html.ActionLink(post.Title, "Index", "IndividualPostViewModels", new { postID = post.Id }, null)</a>
+                                                </h4>
+                                                <h5>@post.PostContent</h5>
+                                            </td>
+                                            <td class="col-md-pull-3">
+                                                <div class="row col-sm-7">
+                                                    <font color="orange">
+                                                        <h6>
+                                                            Submitted:
+                                                            @post.PostedTimeStamp.ToShortDateString()
+                                                            @if (post.User != null)
+                                                            {
+                                                                <span>@post.User.Email</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span>no user found</span>
+                                                            }
+                                                        </h6>
+                                                    </font>
+                                                </div>
+                                            </td>
+
+                                            </tr>
+
+                                            </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
         }
         <div class="tab-pane" id="2">
             <h3>Blah blah</h3>
@@ -158,8 +166,8 @@
             </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
+    </div>
 
 
 

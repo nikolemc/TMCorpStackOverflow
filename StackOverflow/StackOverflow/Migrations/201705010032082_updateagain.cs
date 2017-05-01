@@ -3,7 +3,7 @@ namespace StackOverflow.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class seven : DbMigration
+    public partial class updateagain : DbMigration
     {
         public override void Up()
         {
