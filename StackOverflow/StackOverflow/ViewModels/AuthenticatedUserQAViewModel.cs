@@ -13,8 +13,9 @@ namespace StackOverflow.ViewModels
         [Key]
         public int Id { get; set; }
 
-        public ICollection<Post> Post { get; set; }
+        public ICollection<Post> Posts { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]

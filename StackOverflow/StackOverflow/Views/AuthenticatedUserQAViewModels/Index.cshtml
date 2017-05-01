@@ -1,4 +1,6 @@
-﻿@model IEnumerable<StackOverflow.ViewModels.AuthenticatedUserQAViewModel>
+﻿@model StackOverflow.ViewModels.AuthenticatedUserQAViewModel
+
+@*@using Microsoft.AspNet.Identity;*@
 
 @{
     ViewBag.Title = "Index";
@@ -14,7 +16,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Post)
+            @Html.DisplayNameFor(model => model.Posts)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Comments)
@@ -22,13 +24,13 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@*@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Post)
+            @Html.DisplayFor(Item => item.Posts)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Comments)
+            @Html.DisplayFor(Item => item.Comments)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -36,6 +38,7 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
-}
+}*@
 
+  
 </table>

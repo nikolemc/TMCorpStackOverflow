@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
 using StackOverflow.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace StackOverflow.Controllers
 {
@@ -18,8 +21,17 @@ namespace StackOverflow.Controllers
         // GET: AuthenticatedUserQAViewModels
         public ActionResult Index()
         {
-            var authenticatedUserQAViewModels = db.AuthenticatedUserQAViewModels.Include(a => a.User);
-            return View(authenticatedUserQAViewModels.ToList());
+            var listOfPost = db.Posts.ToList();
+            var listOfComments = db.Comments.ToList();
+            //var TheUser = db.Users.FirstOrDefault(w => w.Id == User.Identity.GetUserId());
+
+            var QandAPageToDisplay = new AuthenticatedUserQAViewModel()
+            { UserId = User.Identity.GetUserId(), Comments = listOfComments, Posts = listOfPost };
+
+            return View(QandAPageToDisplay);
+
+            //var authenticatedUserQAViewModels = db.AuthenticatedUserQAViewModels.Include(a => a.User);
+            //return View(authenticatedUserQAViewModels.ToList());
         }
 
         // GET: AuthenticatedUserQAViewModels/Details/5
