@@ -23,6 +23,14 @@ namespace StackOverflow.Controllers
             return View();
         }
 
+        public ActionResult Search()
+        {
+
+
+            return View();
+        }
+
+
         // GET: SearchViewModels/Details/5
         public ActionResult Details(int? id)
         {
