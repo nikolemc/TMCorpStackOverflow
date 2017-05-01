@@ -212,6 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\201704302206310_Fifth.cs" />
     <Compile Include="Migrations\201704302206310_Fifth.Designer.cs">
       <DependentUpon>201704302206310_Fifth.cs</DependentUpon>
@@ -338,11 +339,13 @@
     <Content Include="Views\AuthenticatedUserQAViewModels\Details.cshtml" />
     <Content Include="Views\AuthenticatedUserQAViewModels\Edit.cshtml" />
     <Content Include="Views\AuthenticatedUserQAViewModels\Index.cshtml" />
+
     <Content Include="Views\SearchViewModels\Create.cshtml" />
     <Content Include="Views\SearchViewModels\Delete.cshtml" />
     <Content Include="Views\SearchViewModels\Details.cshtml" />
     <Content Include="Views\SearchViewModels\Edit.cshtml" />
     <Content Include="Views\SearchViewModels\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -362,6 +365,7 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704302206310_Fifth.resx">
       <DependentUpon>201704302206310_Fifth.cs</DependentUpon>
@@ -373,6 +377,7 @@
       <DependentUpon>201705010011420_seven.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

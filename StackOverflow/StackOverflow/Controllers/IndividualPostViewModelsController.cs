@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using StackOverflow.Models;
 using StackOverflow.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace StackOverflow.Controllers
 {
