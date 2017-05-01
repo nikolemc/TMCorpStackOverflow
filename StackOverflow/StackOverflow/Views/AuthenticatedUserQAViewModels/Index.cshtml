@@ -24,13 +24,13 @@
         <th></th>
     </tr>
 
-@*@foreach (var item in Model) {
+@foreach (var item in Model.Comments) {
     <tr>
         <td>
-            @Html.DisplayFor(Item => item.Posts)
+            @Html.DisplayFor(Item => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(Item => item.Comments)
+            @Html.DisplayFor(Item => item.CommentContent)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -38,7 +38,7 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
-}*@
+}
 
   
 </table>

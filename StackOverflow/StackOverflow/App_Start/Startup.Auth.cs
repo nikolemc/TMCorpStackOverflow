@@ -58,11 +58,11 @@ namespace StackOverflow
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "656482929715-5amsha9fuq8iba2v7ohe7cd905gfv17u.apps.googleusercontent.com",
+                ClientSecret = "KM_I7Og6gYeii7TANs0fujCg"
+            });
         }
     }
 }
