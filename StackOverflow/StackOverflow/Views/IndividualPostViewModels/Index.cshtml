@@ -7,27 +7,22 @@
 }
 
 <div class="row">
-    <p>
+    @*<p>
         &nbsp;
     </p>
     <p>
         &nbsp;
-    </p>
-    <div class="col-md-12 col-lg-12">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">@Model.Post.Title</h3>
-                <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-            </div>
-            <div class="panel-body">@Model.Post.PostContent </div>
-        </div>
+    </p>*@
+
+    <div class="bs-callout bs-callout-warning">
+        <h4>@Model.Post.Title</h4>
+        @Model.Post.PostContent
     </div>
-
-
+    
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12">
-                @Html.ActionLink("New Comment", "Create", "Comments", new { UserID = User.Identity.GetUserId() }, new { @class = "btn btn-default" })
+                @Html.ActionLink("New Comment", "Create", "Comments", new { UserID = User.Identity.GetUserId() }, new { @class = "btn btn-warning" })
             </div>
             <div class="col-sm-12">
                 <h3>User Comment </h3>
